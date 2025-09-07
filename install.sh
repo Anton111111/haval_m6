@@ -35,12 +35,13 @@ InstallAndroidAuto=1
 InstallCarplay=2
 DeleteApps=3
 InstallHUR=4
-RemoveHUR=5
-InstallDudu=6
-RemoveDudu=7
-SerialNumberInfo=8
-ManualCmd=9
-Exit=10
+StartHUR=5
+RemoveHUR=6
+InstallDudu=7
+RemoveDudu=8
+SerialNumberInfo=9
+ManualCmd=10
+Exit=11
 
 # Function to print separator
 print_separator() {
@@ -58,7 +59,8 @@ print_welcome() {
     echo "#                    Все действия выполняются на ваш страх и риск.                   #"
     echo "#                                                                                    #"
     echo "# Скрипт создан Александром (тг: @dahelmm)                                           #"
-    echo "# Конвертирован в bash Anton (https://github.com/Anton111111, тг: @TheManFromSaturn) #"
+    echo "# Конвертирован в bash и дополнен Антоном:           #"
+    echo "# (https://github.com/Anton111111, тг: @TheManFromSaturn)                            #"
     echo "# Группа в телеграмм https://t.me/haval_m6p                                          #"
     echo "#                                                                                    #"
     echo "######################################################################################"
@@ -359,6 +361,23 @@ remove_dudu() {
     read -n 1 -s
 }
 
+# Function to start HUR app
+start_hur() {
+    print_welcome
+    print_separator
+    
+    preparation_for_install
+    check_devices
+    print_separator
+    
+    echo "Запускаю приложение HUR..."
+    adb shell am start -n gb.xxy.hr/.activities.DispatcherActivity
+    echo "HUR приложение запущено."
+    print_separator
+    echo "Готово."
+    read -n 1 -s
+}
+
 # Main menu function
 choose_action() {
     while true; do
@@ -371,6 +390,7 @@ choose_action() {
             "Установить Carplay"
             "Удаление установленных приложений"
             "Установить HUR"
+            "Запустить HUR"
             "Удалить HUR"
             "Установить DuDu"
             "Удалить DuDu"
@@ -399,6 +419,9 @@ choose_action() {
                 ;;
             $InstallHUR)
                 install_hur
+                ;;
+            $StartHUR)
+                start_hur
                 ;;
             $RemoveHUR)
                 remove_hur
