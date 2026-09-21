@@ -40,8 +40,14 @@ RemoveHUR=6
 InstallDudu=7
 RemoveDudu=8
 SerialNumberInfo=9
-ManualCmd=10
-Exit=11
+ExportApks=10
+ManualCmd=11
+Exit=12
+
+# APK backup directories on the laptop
+apkBackupRoot="$SCRIPT_DIR/backups/apk"
+systemApkBackupDir="${apkBackupRoot}/system"
+regularApkBackupDir="${apkBackupRoot}/regular"
 
 # Function to print separator
 print_separator() {
@@ -361,6 +367,81 @@ remove_dudu() {
     read -n 1 -s
 }
 
+# Function to copy system and regular APKs from the head unit
+export_apks() {
+    print_welcome
+    print_separator
+
+    preparation_for_install
+    check_devices
+    print_separator
+
+    # Root access is needed to read system APKs and /data/app.
+    adb root || true
+    adb wait-for-device
+
+    local copied_system=0
+    local copied_regular=0
+    local failed=0
+    local remote_path
+    local relative_path
+    local local_path
+
+    mkdir -p "$systemApkBackupDir" "$regularApkBackupDir"
+
+    echo "Копирую системные APK в: $systemApkBackupDir"
+    local system_roots=(
+        "/system/app"
+        "/system/priv-app"
+        "/system_ext/app"
+        "/system_ext/priv-app"
+        "/product/app"
+        "/product/priv-app"
+    )
+
+    for root in "${system_roots[@]}"; do
+        while IFS= read -r remote_path; do
+            remote_path="${remote_path//$'\r'/}"
+            [[ -z "$remote_path" ]] && continue
+            relative_path="${remote_path#/}"
+            local_path="${systemApkBackupDir}/${relative_path}"
+            mkdir -p "$(dirname "$local_path")"
+            if adb pull "$remote_path" "$local_path" >/dev/null; then
+                ((copied_system++))
+                echo "Скопирован: $remote_path"
+            else
+                ((failed++))
+                echo -e "${RED}Не удалось скопировать: $remote_path${NC}"
+            fi
+        done < <(adb shell "find '$root' -type f -iname '*.apk' 2>/dev/null")
+    done
+
+    echo "Копирую обычные APK в: $regularApkBackupDir"
+    while IFS= read -r remote_path; do
+        remote_path="${remote_path//$'\r'/}"
+        [[ -z "$remote_path" ]] && continue
+        relative_path="${remote_path#/}"
+        local_path="${regularApkBackupDir}/${relative_path}"
+        mkdir -p "$(dirname "$local_path")"
+        if adb pull "$remote_path" "$local_path" >/dev/null; then
+            ((copied_regular++))
+            echo "Скопирован: $remote_path"
+        else
+            ((failed++))
+            echo -e "${RED}Не удалось скопировать: $remote_path${NC}"
+        fi
+    done < <(adb shell "find /data/app -type f -iname '*.apk' 2>/dev/null")
+
+    print_separator
+    echo "Системных APK скопировано: $copied_system"
+    echo "Обычных APK скопировано: $copied_regular"
+    if [ "$failed" -gt 0 ]; then
+        echo -e "${YELLOW}Не удалось скопировать: $failed${NC}"
+    fi
+    echo "Готово. Каталог резервной копии: $apkBackupRoot"
+    read -n 1 -s
+}
+
 # Function to start HUR app
 start_hur() {
     print_welcome
@@ -395,6 +476,7 @@ choose_action() {
             "Установить DuDu"
             "Удалить DuDu"
             "Посмотреть серийный номер ГУ"
+            "Забрать все APK с ГУ"
             "Ручной ввод команды в консоли"
             "Выйти из скрипта"
         )
@@ -434,6 +516,9 @@ choose_action() {
                 ;;
             $SerialNumberInfo)
                 serial_number_info
+                ;;
+            $ExportApks)
+                export_apks
                 ;;
             $ManualCmd)
                 print_separator
