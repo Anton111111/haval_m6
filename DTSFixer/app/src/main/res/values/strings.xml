@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">DTS fixer</string>
+    <string name="mode_label">Режим</string>
+    <string name="mode_reset_dts_title">Выключить и включить DTS</string>
+    <string name="mode_reset_dts_description">Временно отключает DTS и возвращает выбранный пользователем режим.</string>
+    <string name="mode_theatre_full_car_title">DTS: Theatre / Весь салон</string>
+    <string name="mode_theatre_full_car_description">Временно переключает Theatre и «Весь салон», затем возвращает исходный режим.</string>
+    <string name="silent_mode_label">Тихий режим</string>
+    <string name="silent_mode_description">Не показывать уведомление о результате после загрузки ГУ.</string>
+    <string name="delay_label">Задержка после BOOT_COMPLETED, с</string>
+    <string name="delay_description">Через сколько секунд после завершения загрузки выполнить выбранный режим. Допустимо от 0 до 120 секунд.</string>
+    <string name="save">Сохранить</string>
+    <string name="test_mode">Проверить выбранный режим</string>
+    <string name="test_started">Тест запущен</string>
+    <string name="settings_saved">Настройки сохранены. Режим выполнится при следующей загрузке.</string>
+    <string name="author">Автор фикса: Anton111111
+https://github.com/Anton111111</string>
+</resources>

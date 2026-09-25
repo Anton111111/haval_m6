@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.DTSFixer" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/accent_primary</item>
+        <item name="colorPrimaryVariant">@color/accent_glow</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/accent_secondary</item>
+        <item name="colorSecondaryVariant">@color/accent_primary</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:statusBarColor">@color/bg_dark</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="colorSurface">@color/bg_panel</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+    </style>
+</resources>

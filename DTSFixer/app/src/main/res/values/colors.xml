@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_dark">#0B1020</color>
+    <color name="bg_panel">#111827</color>
+    <color name="bg_panel_alt">#1F2937</color>
+    <color name="accent_primary">#61A863</color>
+    <color name="accent_secondary">#409488</color>
+    <color name="accent_glow">#A78BFA</color>
+    <color name="text_primary">#E5E7EB</color>
+    <color name="text_secondary">#B6C2D9</color>
+    <color name="border_soft">#374151</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
