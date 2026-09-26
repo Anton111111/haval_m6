@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_dark"
@@ -8,33 +9,45 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@color/bg_panel"
+        android:clipToPadding="false"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="20dp"
-        android:background="@color/bg_panel"
-        android:clipToPadding="false"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
         android:paddingVertical="24dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/mode_label"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="24dp"
+            android:background="@color/bg_panel"
+            android:clipToPadding="false"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp">
 
-        <Spinner
-            android:id="@+id/mode_spinner"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/accent_primary"
-            android:background="@drawable/background1"
-            android:popupBackground="@color/bg_panel_alt"
-            android:padding="10dp"
-            android:textColor="@color/text_primary" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mode_label"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/mode_spinner"
+                android:layout_width="400dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/background1"
+                android:backgroundTint="@color/accent_primary"
+                android:padding="10dp"
+                android:layout_marginStart="8dp"
+                android:popupBackground="@color/bg_panel_alt"
+                android:textColor="@color/text_primary" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/mode_description"
@@ -43,64 +56,73 @@
             android:layout_marginTop="12dp"
             android:textAlignment="center"
             android:textColor="@color/text_secondary"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="@string/mode_reset_dts_description" />
+
 
         <CheckBox
             android:id="@+id/silent_mode_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/silent_mode_label"
-            android:textColor="@color/text_primary"
-            android:buttonTint="@color/accent_secondary" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
+            android:buttonTint="@color/accent_secondary"
             android:text="@string/silent_mode_description"
-            android:textAlignment="center"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
+            android:textColor="@color/text_primary" />
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/delay_label"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="24dp"
+            android:background="@color/bg_panel"
+            android:clipToPadding="false"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp">
+
+            <TextView
+                android:id="@+id/delay_seconds_input_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/delay_label"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/delay_seconds_input"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:autofillHints=""
+                android:backgroundTint="@color/accent_primary"
+                android:contentDescription="@string/delay_label"
+                android:gravity="center"
+                android:inputType="number"
+                android:labelFor="@id/delay_seconds_input_label"
+                android:maxLength="3"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                tools:text="3" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@string/delay_description"
             android:textAlignment="center"
             android:textColor="@color/text_secondary"
             android:textSize="13sp" />
 
-        <EditText
-            android:id="@+id/delay_seconds_input"
-            android:layout_width="96dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-
-            android:backgroundTint="@color/accent_primary"
-            android:contentDescription="@string/delay_label"
-            android:gravity="center"
-            android:inputType="number"
-            android:maxLength="3"
-            android:selectAllOnFocus="true"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp" />
 
         <Button
             android:id="@+id/save_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/background1"
             android:backgroundTint="@color/accent_primary"
             android:text="@string/save"
@@ -109,8 +131,8 @@
         <Button
             android:id="@+id/test_mode_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/background2"
             android:backgroundTint="@color/accent_secondary"
             android:text="@string/test_mode"
@@ -119,7 +141,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:autoLink="web"
             android:gravity="center"
             android:text="@string/author"

@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.mode_theatre_full_car_title)
         };
         ArrayAdapter<String> modeAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_item, modeTitles);
-        modeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            this, R.layout.item_mode_spinner, modeTitles);
+        modeAdapter.setDropDownViewResource(R.layout.item_mode_spinner_dropdown);
         modeSpinner.setAdapter(modeAdapter);
         modeSpinner.setSelection(mode == BootSettings.Mode.RESET_DTS ? 0 : 1);
         updateModeDescription(modeDescription, modeSpinner.getSelectedItemPosition());
